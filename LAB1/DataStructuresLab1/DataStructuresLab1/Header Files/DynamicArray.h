@@ -4,7 +4,7 @@
 #include <iostream>
 
 //! \brief Структура динамического массива.
-class DynamicArray
+struct DynamicArray
 {
 private:
     // RSDN
