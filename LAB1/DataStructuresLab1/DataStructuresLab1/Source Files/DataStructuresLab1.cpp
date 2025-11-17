@@ -1,9 +1,11 @@
 ﻿#include <iostream>
-#include "DynamicArray.h"
+#include "../Header Files/DynamicArray.h"
 
 using namespace std;
 
-void PrintMenu() {
+// Пользовательское меню
+void PrintMenu() 
+{
     cout << "\nМеню:\n";
     cout << "1. Создать новый массив\n";
     cout << "2. Добавить элемент в конец\n";
@@ -20,9 +22,11 @@ void PrintMenu() {
 }
 
 // Вспомогательная функция для безопасного чтения числа
-bool SafeInputInt(int& var) {
+bool SafeInputInt(int& var) 
+{
     cin >> var;
-    if (cin.fail()) {
+    if (cin.fail()) 
+    {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return false;
@@ -30,166 +34,226 @@ bool SafeInputInt(int& var) {
     return true;
 }
 
-int main() {
+int main() 
+{
     setlocale(LC_ALL, "Russian");
-    DynamicArray dynamicArray;
+    DynamicArray* dynamicArray = nullptr;
     bool initialized = false;
     int choice, value, index, sortVariant;
 
-    do {
+    do 
+    {
         PrintMenu();
         cout << "Выберите пункт: ";
-        if (!SafeInputInt(choice)) {
+        if (!SafeInputInt(choice)) 
+        {
             cout << "Некорректный ввод. Попробуйте еще раз.\n";
             continue;
         }
 
-        switch (choice) {
+        switch (choice) 
+        {
         case 1:
-            dynamicArray.~DynamicArray();
-            dynamicArray = DynamicArray(); // создаем заново
+            if (dynamicArray != nullptr) 
+            {
+                delete dynamicArray;
+                dynamicArray = nullptr;
+            }
+            dynamicArray = new DynamicArray(); 
             initialized = true;
             std::cout << "Массив создан.\n";
             break;
         case 2:
-            if (!initialized) {
-                cout << "Массив не инициализирован. Сначала создайте массив.\n";
+            if (!initialized) 
+            {
+                cout << "Массив не инициализирован.";
+                cout << " Сначала создайте массив.\n";
                 break;
             }
             cout << "Введите значение: ";
-            if (!SafeInputInt(value)) {
+            if (!SafeInputInt(value)) 
+            {
                 cout << "Некорректный ввод значения.\n";
                 break;
             }
-            dynamicArray.AddToEnd(value);
+            dynamicArray->AddToEnd(value);
             break;
         case 3:
-            if (!initialized) {
-                cout << "Массив не инициализирован. Сначала создайте массив.\n";
+            if (!initialized) 
+            {
+                cout << "Массив не инициализирован.";
+                cout << " Сначала создайте массив.\n";
                 break;
             }
             cout << "Введите значение: ";
-            if (!SafeInputInt(value)) {
+            if (!SafeInputInt(value)) 
+            {
                 cout << "Некорректный ввод значения.\n";
                 break;
             }
-            dynamicArray.AddToStart(value);
+            dynamicArray->AddToStart(value);
             break;
         case 4:
-            if (!initialized) {
-                cout << "Массив не инициализирован. Сначала создайте массив.\n";
+            if (!initialized) 
+            {
+                cout << "Массив не инициализирован.";
+                cout << " Сначала создайте массив.\n";
                 break;
             }
             cout << "Введите индекс после которого вставить: ";
-            if (!SafeInputInt(index)) {
+            if (!SafeInputInt(index)) 
+            {
                 cout << "Некорректный ввод индекса.\n";
                 break;
             }
+            if (index < 0 || index >= dynamicArray->GetSize()) 
+            {
+                cout << "Некорректный индекс.";
+                cout << "Он должен находиться в пределах массива(" 
+                    << "0-" << dynamicArray->GetSize()-1 << ").\n";
+                break;
+            }
             cout << "Введите значение: ";
-            if (!SafeInputInt(value)) {
+            if (!SafeInputInt(value)) 
+            {
                 cout << "Некорректный ввод значения.\n";
                 break;
             }
-            dynamicArray.InsertAfter(index, value);
+            dynamicArray->InsertAfter(index, value);
             break;
         case 5:
-            if (!initialized) {
+            if (!initialized) 
+            {
                 cout << "Массив не инициализирован.\n";
                 break;
             }
             cout << "Введите индекс для удаления: ";
-            if (!SafeInputInt(index)) {
+            if (!SafeInputInt(index)) 
+            {
                 cout << "Некорректный ввод индекса.\n";
                 break;
             }
-            dynamicArray.RemoveByIndex(index);
+            if (index < 0 || index >= dynamicArray->GetSize()) 
+            {
+                cout << "Некорректный индекс.";
+                cout << "Он должен находиться в пределах массива("
+                    << "0-" << dynamicArray->GetSize() - 1 << ").\n";
+                break;
+            }
+            dynamicArray->RemoveByIndex(index);
             break;
         case 6:
-            if (!initialized) {
+            if (!initialized) 
+            {
                 cout << "Массив не инициализирован.\n";
                 break;
             }
             cout << "Введите значение для удаления: ";
-            if (!SafeInputInt(value)) {
+            if (!SafeInputInt(value)) 
+            {
                 cout << "Некорректный ввод значения.\n";
                 break;
             }
-            dynamicArray.RemoveByValue(value);
+            dynamicArray->RemoveByValue(value);
             break;
         case 7:
-            if (!initialized) {
+            if (!initialized) 
+            {
                 cout << "Массив не инициализирован.\n";
                 break;
             }
             cout << "Введите индекс для вставки: ";
-            if (!SafeInputInt(index)) {
+            if (!SafeInputInt(index)) 
+            {
                 cout << "Некорректный ввод индекса.\n";
                 break;
             }
+            if (index < 0 || index > dynamicArray->GetSize()) 
+            {
+                cout << "Некорректный индекс.";
+                cout << "Он должен находиться в пределах массива +1 ("
+                    << "0-" << dynamicArray->GetSize() - 1 << ").\n";
+                break;
+            }
             cout << "Введите значение: ";
-            if (!SafeInputInt(value)) {
+            if (!SafeInputInt(value)) 
+            {
                 cout << "Некорректный ввод значения.\n";
                 break;
             }
-            dynamicArray.InsertAt(index, value);
+            dynamicArray->InsertAt(index, value);
             break;
         case 8:
-            if (!initialized) {
+            if (!initialized) 
+            {
                 cout << "Массив не инициализирован.\n";
                 break;
             }
-            cout << "Выберите сортировку:\n1. Пузырьковая\n2. Выбором\n3. Вставками\n";
-            if (!SafeInputInt(sortVariant)) {
+            cout << "Выберите сортировку:\n1.";
+            cout << " Пузырьковая\n2. Выбором\n3. Вставками\n";
+            if (!SafeInputInt(sortVariant)) 
+            {
                 cout << "Некорректный ввод варианта сортировки.\n";
                 break;
             }
-            dynamicArray.Sort(sortVariant);
+            dynamicArray->Sort(sortVariant);
             break;
         case 9:
-            if (!initialized) {
+            if (!initialized) 
+            {
                 cout << "Массив не инициализирован.\n";
                 break;
             }
             cout << "Введите значение для линейного поиска: ";
-            if (!SafeInputInt(value)) {
+            if (!SafeInputInt(value)) 
+            {
                 cout << "Некорректный ввод значения.\n";
                 break;
             }
-            index = dynamicArray.LinearSearch(value);
+            index = dynamicArray->LinearSearch(value);
             if (index != -1)
                 cout << "Элемент найден на позиции: " << index << "\n";
             else
                 cout << "Элемент не найден.\n";
             break;
         case 10:
-            if (!initialized) {
+            if (!initialized) 
+            {
                 cout << "Массив не инициализирован.\n";
                 break;
             }
             cout << "Введите значение для бинарного поиска: ";
-            if (!SafeInputInt(value)) {
+            if (!SafeInputInt(value)) 
+            {
                 cout << "Некорректный ввод значения.\n";
                 break;
             }
-            index = dynamicArray.BinarySearch(value);
+            index = dynamicArray->BinarySearch(value);
             if (index != -1)
                 cout << "Элемент найден на позиции: " << index << "\n";
             else
                 cout << "Элемент не найден.\n";
             break;
         case 11:
-            if (initialized) {
+            if (initialized) 
+            {
                 std::cout << "Массив: ";
-                for (int i = 0; i < dynamicArray.GetSize(); ++i)
-                    std::cout << dynamicArray.GetArray()[i] << " ";
+                for (int i = 0; i < dynamicArray->GetSize(); ++i)
+                    std::cout << dynamicArray->GetArray()[i] << " ";
                 std::cout << "\n";
             }
-            else {
+            else 
+            {
                 std::cout << "Массив не инициализирован.\n";
             }
             break;
         case 0:
             cout << "Выход.\n";
+            if (dynamicArray != nullptr) 
+            {
+                delete[] dynamicArray; 
+                dynamicArray = nullptr;
+            }
             break;
         default:
             cout << "Некорректный выбор. Попробуйте еще раз.\n";

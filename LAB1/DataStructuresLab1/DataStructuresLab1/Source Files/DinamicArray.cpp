@@ -1,9 +1,10 @@
-#include "DynamicArray.h"
+#include "../Header Files/DynamicArray.h"
 
 // Конструктор
-DynamicArray::DynamicArray(int initCapacity) : _size(0), _capacity(initCapacity)
+DynamicArray::DynamicArray(int initCapacity) 
+    : _size(0), _capacity(initCapacity)
 {
-    _array = new int[_capacity];
+    _array = new int[initCapacity];
 }
 
 // Деструктор
@@ -16,18 +17,37 @@ DynamicArray::~DynamicArray()
 void DynamicArray::Init()
 {
     _size = 0;
-    for (int i = 0; i < _capacity; ++i) {
+    for (int i = 0; i < _capacity; ++i) 
+    {
         _array[i] = 0;
     }
 }
 
+void DynamicArray::ShiftRight(int startIndex)
+{
+    for (int i = _size; i > startIndex; --i)
+    {
+        _array[i] = _array[i - 1];
+    }
+}
+
+void DynamicArray::ShiftLeft(int startIndex)
+{
+    for (int i = startIndex; i < _size - 1; ++i)
+    {
+        _array[i] = _array[i + 1];
+    }
+}
+
 // Приватный метод изменения размера массива
-void DynamicArray::resizeArray(int newCapacity)
+void DynamicArray::ResizeArray(int newCapacity)
 {
     int* newArray = new int[newCapacity];
-    for (int i = 0; i < _size; ++i) {
+    for (int i = 0; i < _size; ++i)
+    {
         newArray[i] = _array[i];
     }
+
     delete[] _array;
     _array = newArray;
     _capacity = newCapacity;
@@ -36,8 +56,9 @@ void DynamicArray::resizeArray(int newCapacity)
 // Добавление элемента в конец
 void DynamicArray::AddToEnd(int value)
 {
-    if (_size >= _capacity) {
-        resizeArray(_capacity * 2);
+    if (_size >= _capacity) 
+    {
+        ResizeArray(_capacity * GrowthFactor);
     }
     _array[_size++] = value;
 }
@@ -45,27 +66,24 @@ void DynamicArray::AddToEnd(int value)
 // Добавление элемента в начало
 void DynamicArray::AddToStart(int value)
 {
-    if (_size >= _capacity) {
-        resizeArray(_capacity * 2);
-    }
-    for (int i = _size; i > 0; --i) {
-        _array[i] = _array[i - 1];
-    }
+    if (_size >= _capacity)
+        ResizeArray(_capacity * GrowthFactor);
+
+    ShiftRight(0);
     _array[0] = value;
     ++_size;
 }
+
 
 // Вставка после определенного индекса
 void DynamicArray::InsertAfter(int index, int value)
 {
     if (index < 0 || index >= _size) return;
 
-    if (_size >= _capacity) {
-        resizeArray(_capacity * 2);
-    }
-    for (int i = _size; i > index + 1; --i) {
-        _array[i] = _array[i - 1];
-    }
+    if (_size >= _capacity)
+        ResizeArray(_capacity * GrowthFactor);
+
+    ShiftRight(index + 1);
     _array[index + 1] = value;
     ++_size;
 }
@@ -75,12 +93,10 @@ void DynamicArray::InsertAt(int index, int value)
 {
     if (index < 0 || index > _size) return;
 
-    if (_size >= _capacity) {
-        resizeArray(_capacity * 2);
-    }
-    for (int i = _size; i > index; --i) {
-        _array[i] = _array[i - 1];
-    }
+    if (_size >= _capacity)
+        ResizeArray(_capacity * GrowthFactor);
+
+    ShiftRight(index);
     _array[index] = value;
     ++_size;
 }
@@ -90,23 +106,22 @@ void DynamicArray::RemoveByIndex(int index)
 {
     if (index < 0 || index >= _size) return;
 
-    for (int i = index; i < _size - 1; ++i) {
-        _array[i] = _array[i + 1];
-    }
+    ShiftLeft(index);
     --_size;
 
-    if (_capacity > 8 && _size < _capacity / 4) {
-        resizeArray(_capacity / 2);
-    }
+    if (_capacity > 8 && _size < _capacity / 4)
+        ResizeArray(_capacity / GrowthFactor);
 }
 
 // Удаление по значению
 void DynamicArray::RemoveByValue(int value)
 {
-    for (int i = 0; i < _size; ++i) {
-        if (_array[i] == value) {
+    for (int i = 0; i < _size; ++i) 
+    {
+        if (_array[i] == value) 
+        {
             RemoveByIndex(i);
-            --i; // чтобы проверить новый сдвинутый элемент
+            --i; 
         }
     }
 }
@@ -114,9 +129,10 @@ void DynamicArray::RemoveByValue(int value)
 // Получение элемента по индексу с проверкой
 int DynamicArray::GetElement(int index) const
 {
-    if (index < 0 || index >= _size) {
+    if (index < 0 || index >= _size) 
+    {
         std::cerr << "Index out of range\n";
-        return 0; // или бросить исключение
+        return 0; 
     }
     return _array[index];
 }
@@ -159,7 +175,8 @@ void DynamicArray::Sort(int variant)
 // Линейный поиск
 int DynamicArray::LinearSearch(int value) const
 {
-    for (int i = 0; i < _size; ++i) {
+    for (int i = 0; i < _size; ++i) 
+    {
         if (_array[i] == value)
             return i;
     }
@@ -170,7 +187,8 @@ int DynamicArray::LinearSearch(int value) const
 int DynamicArray::BinarySearch(int value) const
 {
     int left = 0, right = _size - 1;
-    while (left <= right) {
+    while (left <= right) 
+    {
         int mid = left + (right - left) / 2;
         if (_array[mid] == value)
             return mid;
