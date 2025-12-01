@@ -23,7 +23,7 @@
     <ClCompile Include="Source Files\DataStructuresLab1.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\DinamicArray.cpp">
+    <ClCompile Include="Source Files\DynamicArray.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

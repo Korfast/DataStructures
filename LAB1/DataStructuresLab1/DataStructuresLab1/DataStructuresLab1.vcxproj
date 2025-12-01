@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\DataStructuresLab1.cpp" />
-    <ClCompile Include="Source Files\DinamicArray.cpp" />
+    <ClCompile Include="Source Files\DynamicArray.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
