@@ -94,7 +94,8 @@ bool List::AddNode(Node* node, int index)
     // Случай 3: Вставка в середину
     else
     {
-        Node* current = GetNodeByIndex(index); // Узел, который сейчас стоит на этом месте
+        // Узел, который сейчас стоит на этом месте
+        Node* current = GetNodeByIndex(index); 
         Node* prev = current->GetPreviousNode();
 
         prev->SetNextNode(node);
@@ -127,7 +128,8 @@ bool List::RemoveNodeByIndex(int index)
         }
         else
         {
-            _tail = nullptr; // Список стал пустым
+            // Список стал пустым
+            _tail = nullptr; 
         }
     }
     // Если удаляем хвост
@@ -186,7 +188,8 @@ void List::Sort()
             Node* next = current->GetNextNode();
             if (current->GetData() > next->GetData())
             {
-                // Обмен значениями данных (проще и безопаснее, чем перестановка указателей)
+                // Обмен значениями данных 
+                // (проще и безопаснее, чем перестановка указателей)
                 int temp = current->GetData();
                 current->SetData(next->GetData());
                 next->SetData(temp);

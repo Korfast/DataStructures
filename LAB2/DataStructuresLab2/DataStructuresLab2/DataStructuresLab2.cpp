@@ -90,7 +90,8 @@ double MeasureTime(Func action, int iterations)
 }
 
 //! \brief Функция запуска исследования производительности.
-void RunPerformanceTest() {
+void RunPerformanceTest() 
+{
     // Размеры данных для теста 
     vector<int> sizes = { 100, 500, 1000, 5000, 10000, 20000, 50000 };
     // Количество прогонов для усреднения
@@ -148,7 +149,7 @@ void RunPerformanceTest() {
         {
             List testList; FillList(testList, n);
             // DynamicArray пересоздаем, т.к. очистка может быть не реализована полностью
-            DynamicArray testArr(8); for (int k = 0; k < n; k++) testArr.AddToEnd(k);
+            DynamicArray testArray(8); for (int k = 0; k < n; k++) testArray.AddToEnd(k);
 
             double tList = MeasureTime([&]() {
                 Node* node = new Node();
@@ -158,8 +159,8 @@ void RunPerformanceTest() {
                 }, iterations);
 
             double tArr = MeasureTime([&]() {
-                testArr.InsertAt(n / 2, 999);
-                testArr.RemoveByIndex(n / 2);
+                testArray.InsertAt(n / 2, 999);
+                testArray.RemoveByIndex(n / 2);
                 }, iterations);
 
             cout << left << setw(10) << n << setw(15) << "Add Mid"
@@ -169,7 +170,7 @@ void RunPerformanceTest() {
         // 3. ВСТАВКА В КОНЕЦ
         {
             List testList; FillList(testList, n);
-            DynamicArray testArr(8); for (int k = 0; k < n; k++) testArr.AddToEnd(k);
+            DynamicArray testArray(8); for (int k = 0; k < n; k++) testArray.AddToEnd(k);
 
             double tList = MeasureTime([&]() {
                 Node* node = new Node();
@@ -179,9 +180,9 @@ void RunPerformanceTest() {
                 }, iterations);
 
             double tArr = MeasureTime([&]() {
-                testArr.AddToEnd(999);
+                testArray.AddToEnd(999);
                 // Удаляем, чтобы не вызвать реаллокацию памяти раньше времени
-                testArr.RemoveByIndex(testArr.GetSize() - 1);
+                testArray.RemoveByIndex(testArray.GetSize() - 1);
                 }, iterations);
 
             cout << left << setw(10) << n << setw(15) << "Add End"
@@ -191,11 +192,11 @@ void RunPerformanceTest() {
         // 4. УДАЛЕНИЕ ИЗ НАЧАЛА
         {
             List testList; FillList(testList, n);
-            DynamicArray testArr(8); for (int k = 0; k < n; k++) testArr.AddToEnd(k);
+            DynamicArray testArray(8); for (int k = 0; k < n; k++) testArray.AddToEnd(k);
 
-            // Тут сложнее: если мы удалим 100 раз, массив уменьшится.
-            // Мы будем удалять и сразу добавлять обратно, чтобы измерить именно операцию удаления
-            // (хотя добавление внесет погрешность, но она одинакова для обоих, либо можно пренебречь уменьшением на 100 эл при N=50000)
+            // TЕсли мы удалим 100 раз, массив уменьшится.
+            // Мы будем удалять и сразу добавлять обратно, 
+            // чтобы измерить именно операцию удаления
 
             double tList = MeasureTime([&]() {
                 testList.RemoveNodeByIndex(0);
@@ -204,8 +205,8 @@ void RunPerformanceTest() {
                 }, iterations);
 
             double tArr = MeasureTime([&]() {
-                testArr.RemoveByIndex(0);
-                testArr.AddToStart(0); // Компенсация
+                testArray.RemoveByIndex(0);
+                testArray.AddToStart(0); // Компенсация
                 }, iterations);
 
             cout << left << setw(10) << n << setw(15) << "Del Start"
@@ -215,7 +216,7 @@ void RunPerformanceTest() {
         // 5. УДАЛЕНИЕ ИЗ СЕРЕДИНЫ
         {
             List testList; FillList(testList, n);
-            DynamicArray testArr(8); for (int k = 0; k < n; k++) testArr.AddToEnd(k);
+            DynamicArray testArray(8); for (int k = 0; k < n; k++) testArray.AddToEnd(k);
 
             double tList = MeasureTime([&]() {
                 testList.RemoveNodeByIndex(n / 2);
@@ -224,8 +225,8 @@ void RunPerformanceTest() {
                 }, iterations);
 
             double tArr = MeasureTime([&]() {
-                testArr.RemoveByIndex(n / 2);
-                testArr.InsertAt(n / 2, 0);
+                testArray.RemoveByIndex(n / 2);
+                testArray.InsertAt(n / 2, 0);
                 }, iterations);
 
             cout << left << setw(10) << n << setw(15) << "Del Mid"
@@ -235,7 +236,7 @@ void RunPerformanceTest() {
         // 6. УДАЛЕНИЕ ИЗ КОНЦА 
         {
             List testList; FillList(testList, n);
-            DynamicArray testArr(8); for (int k = 0; k < n; k++) testArr.AddToEnd(k);
+            DynamicArray testArray(8); for (int k = 0; k < n; k++) testArray.AddToEnd(k);
 
             double tList = MeasureTime([&]() {
                 testList.RemoveNodeByIndex(testList.GetSize() - 1);
@@ -244,8 +245,8 @@ void RunPerformanceTest() {
                 }, iterations);
 
             double tArr = MeasureTime([&]() {
-                testArr.RemoveByIndex(testArr.GetSize() - 1);
-                testArr.AddToEnd(0);
+                testArray.RemoveByIndex(testArray.GetSize() - 1);
+                testArray.AddToEnd(0);
                 }, iterations);
 
             cout << left << setw(10) << n << setw(15) << "Del End"
@@ -254,7 +255,7 @@ void RunPerformanceTest() {
 
         cout << string(55, '-') << endl;
     }
-    cout << "Готово! Скопируйте данные в Excel для построения графиков.\n";
+    cout << "Готово! данные для построения графиков в Excel.\n";
 }
 
 void PrintList(List& list)
@@ -305,7 +306,8 @@ int main()
 
         switch (choice)
         {
-        case 1: // Вставка в начало
+        // Вставка в начало
+        case 1: 
         {
             int val = GetIntInput("Введите значение: ");
             Node* newNode = new Node();
@@ -313,7 +315,8 @@ int main()
             myList.AddNode(newNode, 0);
             break;
         }
-        case 2: // Вставка в конец
+        // Вставка в конец
+        case 2: 
         {
             int val = GetIntInput("Введите значение: ");
             Node* newNode = new Node();
@@ -321,7 +324,8 @@ int main()
             myList.AddNode(newNode, myList.GetSize());
             break;
         }
-        case 3: // Удаление по индексу
+        // Удаление по индексу
+        case 3: 
         {
             int index = GetIntInput("Введите индекс для удаления: ");
             if (!myList.RemoveNodeByIndex(index))
@@ -330,13 +334,15 @@ int main()
             }
             break;
         }
-        case 4: // Удаление по значению
+        // Удаление по значению
+        case 4: 
         {
             int val = GetIntInput("Введите значение для удаления: ");
             myList.RemoveNodeByValue(val);
             break;
         }
-        case 5: // Вставка после индекса
+        // Вставка после индекса
+        case 5: 
         {
             int index = GetIntInput("Введите индекс элемента, после которого вставить: ");
             int val = GetIntInput("Введите значение: ");
@@ -352,7 +358,8 @@ int main()
             }
             break;
         }
-        case 6: // Вставка перед индексом
+        // Вставка перед индексом
+        case 6: 
         {
             int index = GetIntInput("Введите индекс элемента, перед которым вставить: ");
             int val = GetIntInput("Введите значение: ");
@@ -368,13 +375,15 @@ int main()
             }
             break;
         }
-        case 7: // Сортировка
+        // Сортировка
+        case 7: 
         {
             myList.Sort();
             cout << "Список отсортирован.\n";
             break;
         }
-        case 8: // Поиск
+        // Поиск
+        case 8: 
         {
             int val = GetIntInput("Введите значение для поиска: ");
             Node* found = myList.FindNodeByValue(val);
@@ -393,7 +402,8 @@ int main()
             }
             break;
         }
-        case 9: // Очистка
+        // Очистка
+        case 9: 
         {
             myList.Clean();
             cout << "Список очищен.\n";
@@ -402,6 +412,11 @@ int main()
         case 10:
             RunPerformanceTest();
             break;
+        case 11:
+        {
+            PrintList(myList);
+        }
+
         case 0:
             cout << "Выход из программы.\n";
             break;
