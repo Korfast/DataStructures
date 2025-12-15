@@ -6,7 +6,7 @@
 //! \brief Проверяет, пуст ли стек, используя его метод Peek().
 //! \param stack Указатель на проверяемый стек.
 //! \return true, если стек пуст, иначе false.
-bool StackIsEmpty(Stack* stack)
+static bool StackIsEmpty(Stack* stack)
 {
     // Предполагается, что Stack::Peek() возвращает nullptr, если стек пуст.
     return stack->Peek() == nullptr;
@@ -98,6 +98,7 @@ int QueueTwoStack::Dequeue()
     return _outStack->Pop();
 }
 
+/*
 //! \brief Изменяет размер underlying структур данных.
 //! \param newCapacity Новая емкость.
 void QueueTwoStack::Resize(int newCapacity)
@@ -117,3 +118,4 @@ void QueueTwoStack::Resize(int newCapacity)
         _outStack->Resize(newCapacity);
     }
 }
+*/

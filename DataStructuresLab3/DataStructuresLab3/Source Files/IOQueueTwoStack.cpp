@@ -2,6 +2,7 @@
 #include <iostream>
 #include <limits>
 #include <stdexcept>
+#include "../Header Files/io_utils.h"
 
 // --- Приватные вспомогательные функции для IO ---
 
@@ -13,11 +14,6 @@ static void DisplayQueueTwoStackMenu() {
     std::cout << "3. Изменить размер (Resize) - *Неприменимо*\n";
     std::cout << "4. Назад в Главное меню\n";
     std::cout << "Ваш выбор: ";
-}
-
-static void ClearInputBuffer() {
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 // --- Реализация методов IOQueueTwoStack ---

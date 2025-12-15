@@ -2,6 +2,8 @@
 #include <iostream>
 #include <limits>
 #include <stdexcept>
+#include "../Header Files/io_utils.h"
+
 //! \brief Выводит меню кольцевого буфера.
 static void DisplayBufferMenu() {
     std::cout << "\n=== Меню: Кольцевой Буфер ===\n";
@@ -12,11 +14,6 @@ static void DisplayBufferMenu() {
     std::cout << "5. Изменить размер (Resize)\n";
     std::cout << "6. Назад в Главное меню\n";
     std::cout << "Ваш выбор: ";
-}
-
-static void ClearInputBuffer() {
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 // --- Реализация методов IORingBuffer ---

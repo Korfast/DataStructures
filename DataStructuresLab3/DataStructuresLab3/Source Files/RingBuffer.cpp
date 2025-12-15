@@ -88,9 +88,8 @@ int RingBuffer::GetElement()
     return val;
 }
 
-void RingBuffer::Resize() 
+void RingBuffer::Resize(int newCapacity) 
 {
-    int newCapacity = _capacity * 2;
     if (newCapacity < 1) newCapacity = 1;
 
     int* newArray = new int[newCapacity];
@@ -107,6 +106,29 @@ void RingBuffer::Resize()
     _headIndex = 0;
     _tailIndex = _size - 1;
     if (_size == 0) 
+    {
+        _tailIndex = -1;
+    }
+}
+
+void RingBuffer::Resize()
+{
+    int newCapacity = _capacity * 2;
+
+    int* newArray = new int[newCapacity];
+
+    for (int i = 0; i < _size; ++i)
+    {
+        newArray[i] = _array[(_headIndex + i) % _capacity];
+    }
+
+    delete[] _array;
+
+    _array = newArray;
+    _capacity = newCapacity;
+    _headIndex = 0;
+    _tailIndex = _size - 1;
+    if (_size == 0)
     {
         _tailIndex = -1;
     }

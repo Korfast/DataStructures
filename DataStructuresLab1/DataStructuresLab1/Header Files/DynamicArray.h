@@ -1,4 +1,4 @@
-#ifndef DYNAMICARRAY_H
+ #ifndef DYNAMICARRAY_H
 #define DYNAMICARRAY_H
 
 #include <iostream>

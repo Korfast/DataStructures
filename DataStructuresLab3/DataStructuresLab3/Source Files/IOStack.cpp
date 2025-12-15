@@ -2,6 +2,7 @@
 #include <iostream>
 #include <limits>
 #include <stdexcept>
+#include "../Header Files/io_utils.h"
 
 // --- Приватные вспомогательные функции для IO ---
 
@@ -15,11 +16,6 @@ static void DisplayStackMenu() {
     std::cout << "Ваш выбор: ";
 }
 
-//! \brief Очищает буфер ввода.
-static void ClearInputBuffer() {
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-}
 
 // --- Реализация методов IOStack ---
 

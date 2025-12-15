@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DataStructuresLab3.cpp" />
+    <ClCompile Include="Source Files\DataStructuresLab3.cpp" />
     <ClCompile Include="Source Files\IOQueueRing.cpp" />
     <ClCompile Include="Source Files\IOQueueTwoStack.cpp" />
     <ClCompile Include="Source Files\IORingBuffer.cpp" />
@@ -139,6 +139,7 @@
     <ClInclude Include="Header Files\IOQueueTwoStack.h" />
     <ClInclude Include="Header Files\IORingBuffer.h" />
     <ClInclude Include="Header Files\IOStack.h" />
+    <ClInclude Include="Header Files\io_utils.h" />
     <ClInclude Include="Header Files\Node.h" />
     <ClInclude Include="Header Files\QueueRing.h" />
     <ClInclude Include="Header Files\QueueTwoStack.h" />

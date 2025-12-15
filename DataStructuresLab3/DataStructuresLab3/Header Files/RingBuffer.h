@@ -39,6 +39,8 @@ public:
 	int GetElement();
 
 	//! \brief Увеличивает размер массива кольцевого буфера.
+	void Resize(int size);
+
 	void Resize();
 
 	//! \brief Очищает кольцевой буфер.
@@ -62,8 +64,8 @@ public:
 	//! \return Количество элементов в кольцевом буфере.
 	int GetSize() const;
 
-	bool IsEmpty() const; // <-- Добавлен
-	bool IsFull() const;  // <-- Добавлен
+	bool IsEmpty() const; 
+	bool IsFull() const;  
 };
 
 #endif // RINGBUFFER_H
