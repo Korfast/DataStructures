@@ -8,7 +8,7 @@
 
 #include "Header Files/List.h"
 #include "Header Files/Node.h"
-#include "../../../LAB1/DataStructuresLab1/DataStructuresLab1/Header Files/DynamicArray.h"
+#include "../../DataStructuresLab1/DataStructuresLab1/Header Files/DynamicArray.h"
 
 using namespace std;
 using namespace std::chrono;

@@ -123,13 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\LAB1\DataStructuresLab1\DataStructuresLab1\Source Files\DynamicArray.cpp" />
+    <ClCompile Include="..\..\DataStructuresLab1\DataStructuresLab1\Source Files\DynamicArray.cpp" />
     <ClCompile Include="DataStructuresLab2.cpp" />
     <ClCompile Include="Source Files\List.cpp" />
     <ClCompile Include="Source Files\Node.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\LAB1\DataStructuresLab1\DataStructuresLab1\Header Files\DynamicArray.h" />
+    <ClInclude Include="..\..\DataStructuresLab1\DataStructuresLab1\Header Files\DynamicArray.h" />
     <ClInclude Include="Header Files\List.h" />
     <ClInclude Include="Header Files\Node.h" />
   </ItemGroup>
