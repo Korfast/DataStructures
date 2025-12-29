@@ -15,39 +15,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source Files\DataStructuresLab4.cpp">
+    <ClCompile Include="Source\DataStructuresLab5.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\KeyValuePair.cpp">
+    <ClCompile Include="Source\BinaryTreeNode.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\HashTable.cpp">
+    <ClCompile Include="Source\BinaryTree.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\Dictionary.cpp">
+    <ClCompile Include="Source\TreapNode.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\IODictionary.cpp">
+    <ClCompile Include="Source\Treap.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\IOHashTable.cpp">
+    <ClCompile Include="Source\IOBinaryTree.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IOTreap.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header Files\KeyValuePair.h">
+    <ClInclude Include="Header\BinaryTreeNode.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\HashTable.h">
+    <ClInclude Include="Header\BinaryTree.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\Dictionary.h">
+    <ClInclude Include="Header\TreapNode.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\IODictionary.h">
+    <ClInclude Include="Header\Treap.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\IOHashTable.h">
+    <ClInclude Include="Header\IOBinaryTree.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\IOTreap.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,154 +1,55 @@
 ﻿#include <iostream>
-#include <string>
-#include <vector>
-#include <iomanip>
 #include <clocale>
 #include "../Header Files/Dictionary.h"
+#include "../Header Files/IODictionary.h"
+#include "../Header Files/IOHashTable.h"
 
-//! \brief Выводит текущее состояние Словаря и Хеш-таблицы.
-//! \param dictionary Указатель на объект словаря.
-void DisplayState(Dictionary* dictionary)
+void MainMenu()
 {
-    if (!dictionary)
-    {
-        return;
-    }
-
-    HashTable* table = dictionary->GetInternalTable();
-    auto buckets = table->GetBuckets();
-
-    std::cout << "\n=== Состояние Словаря ===\n";
-    std::cout << "Всего записей: " << table->GetSize() << "\n";
-
-    for (int i = 0; i < table->GetCapacity(); i++)
-    {
-        if (buckets[i] != nullptr)
-        {
-            for (const auto& pair : *buckets[i])
-            {
-                std::cout << "[" << pair.GetKey() << "]: " << pair.GetValue() << "\n";
-            }
-        }
-    }
-
-    std::cout << "\n=== Состояние Хеш-таблицы ===\n";
-    std::cout << "Вместимость: " << table->GetCapacity() << "\n";
-    std::cout << "Размер: " << table->GetSize() << "\n";
-    std::cout << "Коэффициент заполнения: " << (float)table->GetSize() / table->GetCapacity() << "\n";
-    std::cout << "Пары ключ-значение:\n";
-
-    for (int i = 0; i < table->GetCapacity(); i++)
-    {
-        std::cout << "[" << std::setw(2) << i << "]: ";
-        if (buckets[i] == nullptr || buckets[i]->empty())
-        {
-            std::cout << "ПУСТО\n";
-        }
-        else
-        {
-            bool first = true;
-            for (const auto& pair : *buckets[i])
-            {
-                if (!first)
-                {
-                    std::cout << ", ";
-                }
-                std::cout << "{" << pair.GetKey() << ": " << pair.GetValue() << "}";
-                first = false;
-            }
-            std::cout << "\n";
-        }
-    }
-}
-
-//! \brief Сценарий демонстрации возможностей СД.
-void RunDemonstration(Dictionary* dictionary)
-{
-    std::cout << "\n--- Запуск демонстрационных сценариев ---\n";
-
-    std::cout << "1. Добавление нескольких пар ключ-значение...\n";
-    dictionary->SetValue("город", "Москва");
-    dictionary->SetValue("имя", "Иван");
-    dictionary->SetValue("возраст", "25");
-    DisplayState(dictionary);
-
-    std::cout << "2. Добавление ключей для демонстрации обработки коллизий...\n";
-    // В методе Пирсона ключи могут попасть в один индекс в зависимости от T-таблицы
-    dictionary->SetValue("адрес", "ул. Пушкина");
-    DisplayState(dictionary);
-
-    std::cout << "3. Поиск значения для ключа 'имя': " << dictionary->GetValue("имя") << "\n";
-
-    std::cout << "4. Попытка добавить дубликат ключа 'город'...\n";
-    dictionary->SetValue("город", "Питер");
-
-    std::cout << "5. Удаление ключа 'возраст'...\n";
-    dictionary->RemoveKeyValue("возраст");
-    DisplayState(dictionary);
+    std::cout << "\n1. Добавить запись\n2. Удалить запись\n3. Найти значение\n";
+    std::cout << "4. Показать словарь\n5. Показать структуру хеш-таблицы\n";
+    std::cout << "6. Демо-сценарий\n0. Выход\nВыбор: ";
 }
 
 int main()
 {
-    // Установка русской локали для консоли
     setlocale(LC_ALL, "Russian");
+    Dictionary* dictionary = new Dictionary();
+    int choice = -1;
 
-    Dictionary* myDictionary = new Dictionary();
-    int choice = 0;
-
-    while (true)
+    while (choice != 0)
     {
-        std::cout << "\n=== Главное меню Словаря ===\n";
-        std::cout << "1. Добавить пару ключ-значение\n";
-        std::cout << "2. Удалить по ключу\n";
-        std::cout << "3. Найти значение по ключу\n";
-        std::cout << "4. Показать текущее состояние\n";
-        std::cout << "5. Очистить словарь (Новый экземпляр)\n";
-        std::cout << "6. Демонстрационные сценарии\n";
-        std::cout << "7. Выход\n";
-        std::cout << "Ваш выбор: ";
-
-        if (!(std::cin >> choice))
-        {
-            break;
-        }
+        MainMenu();
+        if (!(std::cin >> choice)) break;
 
         std::string key, value;
         switch (choice)
         {
         case 1:
-            std::cout << "Введите ключ: "; std::cin >> key;
-            std::cout << "Введите значение: "; std::cin >> value;
-            myDictionary->SetValue(key, value);
-            DisplayState(myDictionary);
+            std::cout << "Ключ: "; std::cin >> key;
+            std::cout << "Значение: "; std::cin >> value;
+            dictionary->SetValue(key, value);
             break;
         case 2:
-            std::cout << "Введите ключ для удаления: "; std::cin >> key;
-            myDictionary->RemoveKeyValue(key);
-            DisplayState(myDictionary);
+            std::cout << "Ключ для удаления: "; std::cin >> key;
+            dictionary->RemoveKeyValue(key);
             break;
         case 3:
-            std::cout << "Введите ключ для поиска: "; std::cin >> key;
-            std::cout << "Значение: " << myDictionary->GetValue(key) << "\n";
+            std::cout << "Ключ для поиска: "; std::cin >> key;
+            std::cout << "Результат: " << dictionary->GetValue(key) << std::endl;
             break;
         case 4:
-            DisplayState(myDictionary);
+            IODictionary::Show(dictionary);
             break;
         case 5:
-            delete myDictionary;
-            myDictionary = new Dictionary();
-            std::cout << "Словарь очищен.\n";
+            IOHashTable::Print(dictionary->GetInternalTable());
             break;
         case 6:
-            RunDemonstration(myDictionary);
+            IODictionary::RunDemo(dictionary);
             break;
-        case 7:
-            delete myDictionary;
-            return 0;
-        default:
-            std::cout << "Неверный выбор. Попробуйте снова.\n";
         }
     }
 
-    delete myDictionary;
+    delete dictionary;
     return 0;
 }
