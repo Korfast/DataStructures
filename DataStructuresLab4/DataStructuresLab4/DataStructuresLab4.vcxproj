@@ -31,6 +31,7 @@
     <ClInclude Include="Header Files\HashTable.h" />
     <ClInclude Include="Header Files\IODictionary.h" />
     <ClInclude Include="Header Files\IOHashTable.h" />
+    <ClInclude Include="Header Files\io_utils.h" />
     <ClInclude Include="Header Files\KeyValuePair.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

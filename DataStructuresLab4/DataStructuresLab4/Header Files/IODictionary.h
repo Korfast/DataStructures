@@ -3,14 +3,18 @@
 
 #include "Dictionary.h"
 
-//! \brief Функции для работы с интерфейсом словаря.
-namespace IODictionary
+//! \brief Класс для ввода-вывода данных словаря.
+class IODictionary
 {
-    //! \brief Выводит данные словаря в удобном виде.
-    void Show(Dictionary* dictionary);
+public:
+    //! \brief Запускает главное меню словаря (7 пунктов).
+    static void RunDictionaryMenu(Dictionary* dictionary);
 
-    //! \brief Запускает автоматический демонстрационный сценарий.
-    void RunDemo(Dictionary* dictionary);
-}
+    //! \brief Выводит логическое состояние словаря (только пары).
+    static void Show(Dictionary* dictionary);
+
+    //! \brief Запускает демонстрационный сценарий заполнения.
+    static void RunDemo(Dictionary* dictionary);
+};
 
 #endif

@@ -3,11 +3,12 @@
 
 #include "HashTable.h"
 
-//! \brief Функции для визуализации хеш-таблицы.
-namespace IOHashTable
+//! \brief Класс для визуализации внутреннего устройства хеш-таблицы.
+class IOHashTable
 {
-    //! \brief Выводит структуру хеш-таблицы (корзины и цепочки коллизий).
-    void Print(HashTable* table);
-}
+public:
+    //! \brief Выводит техническое состояние: Capacity, Size, Load Factor и список корзин.
+    static void Print(HashTable* table);
+};
 
 #endif

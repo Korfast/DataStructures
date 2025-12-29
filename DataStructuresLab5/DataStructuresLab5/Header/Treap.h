@@ -10,20 +10,20 @@ private:
     //! \brief Корень декартового дерева.
     TreapNode* _root;
 
-    //! \brief Разделяет дерево на два поддерева.
-    void Split(TreapNode* node, int key, TreapNode*& left, TreapNode*& right);
-
     //! \brief Сливает два дерева в одно.
     TreapNode* Merge(TreapNode* left, TreapNode* right);
-
-    //! \brief Рекурсивное освобождение памяти.
-    void Clear(TreapNode* node);
 
     //! \brief Рекурсивная оптимизированная вставка.
     TreapNode* AddOptimizedInternal(TreapNode* node, int key, int priority);
 
     //! \brief Рекурсивное оптимизированное удаление.
     TreapNode* RemoveOptimizedInternal(TreapNode* node, int key);
+
+    //! \brief Рекурсивное освобождение памяти.
+    void Clear(TreapNode* node);
+
+    //! \brief Разделяет дерево на два поддерева.
+    void Split(TreapNode* node, int key, TreapNode*& left, TreapNode*& right);
 
 public:
     Treap();

@@ -24,11 +24,9 @@ static void DisplayMainMenu() {
 
 // --- ГЛАВНАЯ ФУНКЦИЯ МЕНЮ ---
 
-/**
- * @brief Основная функция для запуска программы и управления главным меню.
- */
+//! \brief Основная функция для запуска программы и управления главным меню.
 static void RunDataStructuresLab3() {
-    // 1. Создание экземпляров структур данных, с которыми будут работать IO-классы
+    // Создание экземпляров структур данных, с которыми будут работать IO-классы
     Stack stack;
     RingBuffer ringBuffer;
     QueueRing queueRing;
@@ -77,8 +75,7 @@ static void RunDataStructuresLab3() {
 }
 
 
-// --- ФУНКЦИЯ MAIN (точка входа) ---
-
+//! ФУНКЦИЯ MAIN
 int main() {
     setlocale(LC_ALL, "Russian");
     RunDataStructuresLab3();
